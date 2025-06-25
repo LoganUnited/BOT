@@ -1,0 +1,13 @@
+https://chat.deepseek.com/a/chat/s/14dacc91-2bc6-41a1-87a4-031290a36e38 - ОСНОВА НЕЙРОСЕТИ
+config.py - Конфигурация бота:
+main.py - Точка входа:
+bot/handlers.py - Основные обработчики:
+bot/commands/init.py - Импорт всех команд:
+bot/commands/profile.py - Команды профиля:
+bot/commands/gameplay.py - Игровые команды:
+bot/commands/economy.py - Экономические команды:
+bot/commands/admin.py - Админские команды:
+bot/commands/combat.py - Боевая система:
+database/manager.py - Управление БД:
+game/core.py - Основная игровая логика:
+game/combat.py - Логика боевой системы:
