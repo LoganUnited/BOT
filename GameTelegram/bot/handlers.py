@@ -9,7 +9,6 @@ from telegram.ext import (
 )
 from utils.logger import setup_logger
 from typing import Dict, Any
-from game.core import game  # Добавьте этот импорт
 
 # Импорт обработчиков команд
 from bot.commands.move import get_move_handlers
@@ -23,9 +22,14 @@ logger = setup_logger()
 # Состояния разговора
 WAIT_NICKNAME = 1
 
+def get_game():
+    from game.core import game
+    return game
+
 class HandlersManager:
     def __init__(self):
         self.command_handlers = self._initialize_handlers()
+        self.game = get_game()  # Инициализируем game здесь
 
     def _initialize_handlers(self) -> list:
         """Инициализация всех обработчиков"""
@@ -42,8 +46,6 @@ class HandlersManager:
             # Основные игровые команды
             *get_profile_handlers(),
             *get_combat_handlers(),
-            
-            # Другие команды...
         ]
 
     def _create_registration_handler(self) -> ConversationHandler:
@@ -69,7 +71,7 @@ class HandlersManager:
         """Обработчик команды /start"""
         user = update.effective_user
         try:
-            if game.player_exists(user.id):
+            if self.game.player_exists(user.id):
                 await update.message.reply_text(
                     f"Привет, {user.username or 'игрок'}! Ты уже в игре!",
                     reply_markup=self._main_menu_markup()
@@ -107,7 +109,7 @@ class HandlersManager:
                 )
                 return WAIT_NICKNAME
             
-            if game.register_player(user.id, nickname):
+            if self.game.register_player(user.id, nickname):
                 await update.message.reply_text(
                     f"✅ Регистрация успешна, {nickname}!\n"
                     "Используй /help для списка команд.",

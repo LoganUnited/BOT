@@ -11,9 +11,15 @@ class Game:
     def __init__(self):
         """Инициализация игрового ядра"""
         self.db = DatabaseManager()
-        self.world_map = WorldMap()
         self.transport_manager = TransportManager()
-        self.players: Dict[int, Player] = {}  # Кэш игроков в памяти
+        self.players: Dict[int, Player] = {}
+        self._world_map = None  # Ленивая загрузка
+    
+    @property
+    def world_map(self) -> WorldMap:
+        if self._world_map is None:
+            self._world_map = WorldMap()
+        return self._world_map
     
     def player_exists(self, user_id: int) -> bool:
         """Проверка существования игрока"""

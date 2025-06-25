@@ -1,5 +1,6 @@
-from game.world.base import BaseLocationfrom typing import Dict, List, Optional
-from game.world.base import BaseLocation, SubLocation
+from game.world.locations.base import BaseLocation
+from game.world.locations.sub import SubLocation
+from typing import Dict, List, Optional
 
 class WorldMap:
     def __init__(self):
@@ -55,5 +56,4 @@ class WorldMap:
         return (distance / speed) * 3600  # часы * 3600 = секунды
 
 # Пример использования:
-world_map = WorldMap()
 print(world_map.get_available_locations("LS"))

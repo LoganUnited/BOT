@@ -21,16 +21,17 @@ class SubLocation:
         self.shops[shop.id] = shop
 
 class BaseLocation:
-    def __init__(self, id: str, name: str, description: str):  # Добавляем ID
-        self.id = id
+      def __init__(self, loc_id: str, name: str, description: str):
+        self.id = loc_id
         self.name = name
         self.description = description
-        self.sub_locations: Dict[str, SubLocation] = {}  # Ключ - ID подлокации
-        self.connections: Dict[str, int] = {}  # Ключ - ID связанной локации
+        self.connections: Dict[str, float] = {}  # {location_id: distance}
+        self.sub_locations: Dict[str, SubLocation] = {}
+    
+    def connect_to(self, other: 'BaseLocation', distance: float):
+        self.connections[other.id] = distance
+        other.connections[self.id] = distance
     
     def add_sub_location(self, sub_loc: SubLocation):
+        sub_loc.set_parent(self.id)
         self.sub_locations[sub_loc.id] = sub_loc
-    
-    def connect_to(self, other_location: 'BaseLocation', distance: int):
-        self.connections[other_location.id] = distance
-        other_location.connections[self.id] = distance
