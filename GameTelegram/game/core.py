@@ -9,7 +9,6 @@ logger = logging.getLogger(__name__)
 
 class Game:
     def __init__(self):
-        """Инициализация игрового ядра"""
         self.db = DatabaseManager()
         self.transport_manager = TransportManager()
         self.players: Dict[int, Player] = {}

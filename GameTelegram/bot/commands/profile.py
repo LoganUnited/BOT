@@ -83,9 +83,8 @@ async def back_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.message.reply_text("⚠️ Произошла ошибка при возвращении в игру.")
 
 def get_profile_handlers():
-    """Возвращает обработчики команд профиля"""
+    from .profile import profile_command, inventory_command  # Локальный импорт
     return [
         CommandHandler("profile", profile_command),
-        CommandHandler("move", move_command),
-        CommandHandler("back", back_command)
+        CommandHandler("inventory", inventory_command),
     ]

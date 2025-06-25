@@ -4,7 +4,7 @@ from typing import Dict, List, Optional
 
 class WorldMap:
     def __init__(self):
-        self.locations: Dict[str, BaseLocation] = {}  # Ключ - ID локации
+        self.locations: Dict[str, BaseLocation] = {}
         self._setup_world()
     
     def _setup_world(self):

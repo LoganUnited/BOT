@@ -1,25 +1,22 @@
 from game.world.locations.base import BaseLocation, SubLocation, Shop
-from game.items import shop_items
+from game.items.shop_items import health_potion, mana_potion
 
 class LosSantos(BaseLocation):
     def __init__(self):
-        super().__init__()
-        self.name = "Лос-Сантос"
-        self.description = "Солнечный город с пляжами и гетто"
+        super().__init__("LS", "Los Santos", "Солнечный город")
         
-        downtown = SubLocation(
-            name="Downtown",
-            description="Деловой центр города",
-            level_requirement=5
-        )
+        # Создаем подлокации
+        center = SubLocation("ls_center", "Центр", "Центральная площадь")
+        beach = SubLocation("ls_beach", "Пляж", "Песчаный пляж с видом на океан")
         
-        downtown.add_shop(Shop(
-            id=1001,
-            name="24/7 Supermarket",
-            location="Downtown",
-            shop_type="general",
-            inventory=shop_items.GENERAL_GOODS,
-            working_hours=(0, 24)
-        ))
+        # Добавляем подлокации
+        self.add_sub_location(center)
+        self.add_sub_location(beach)
         
-        self.add_sub_location(downtown)
+        # Создаем магазины
+        market = Shop("market", "Рынок", "Местный рынок с различными товарами")
+        market.add_item(health_potion())
+        market.add_item(mana_potion())
+        
+        # Добавляем магазины
+        self.add_shop(market)
