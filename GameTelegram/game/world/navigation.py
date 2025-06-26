@@ -54,6 +54,3 @@ class WorldMap:
         # speed - скорость в км/ч, distance - в км
         # Возвращаем время в секундах
         return (distance / speed) * 3600  # часы * 3600 = секунды
-
-# Пример использования:
-print(world_map.get_available_locations("LS"))

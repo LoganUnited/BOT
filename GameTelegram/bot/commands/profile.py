@@ -1,6 +1,7 @@
 from telegram import Update
 from telegram.ext import ContextTypes, CommandHandler
-from game.core import game
+from game.core import Game
+game = Game.get_instance()
 from config import Config
 from utils.logger import setup_logger
 
